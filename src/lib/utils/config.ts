@@ -2,9 +2,20 @@
  * Application configuration constants
  */
 
+// Base path for the application
+const RAW_BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+export const BASE_PATH = RAW_BASE_PATH === "/" ? "" : RAW_BASE_PATH;
+
 // Production deployment URL
-export const DEPLOYED_ORIGIN =
+const RAW_ORIGIN =
   process.env.NEXT_PUBLIC_SITE_URL || "https://chibuike07.github.io";
+const NORMALIZED_ORIGIN = RAW_ORIGIN.replace(/\/+$/, "");
+const ORIGIN_WITHOUT_BASE_PATH =
+  BASE_PATH && NORMALIZED_ORIGIN.endsWith(BASE_PATH)
+    ? NORMALIZED_ORIGIN.slice(0, -BASE_PATH.length) || NORMALIZED_ORIGIN
+    : NORMALIZED_ORIGIN;
+
+export const DEPLOYED_ORIGIN = ORIGIN_WITHOUT_BASE_PATH;
 
 // Open Graph image URL (must be a publicly accessible PNG/JPG for WhatsApp previews)
 export const OG_IMAGE_URL =
@@ -13,9 +24,6 @@ export const OG_IMAGE_URL =
 
 // Logo URL (optional, must be a publicly accessible image)
 export const LOGO_URL = process.env.NEXT_PUBLIC_LOGO_URL || OG_IMAGE_URL;
-
-// Base path for the application
-export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 // Full application URL (origin + base path)
 export const APP_URL = `${DEPLOYED_ORIGIN}${BASE_PATH}`;
