@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { categories, products, formatter } from "@/lib/utils/dummyData";
 import QuantityActions from "@/components/ProductDetail/QuantityActions";
 import {
@@ -95,7 +96,7 @@ const ProductContainer = styled.article`
     justify-content: center;
     min-height: 350px;
 
-    img {
+    .product_image {
       max-width: 100%;
       height: auto;
     }
@@ -355,13 +356,14 @@ const ProductDetailPage = ({ params }: IProductDetailPageProps) => {
         />
 
         <div className="product_header">
-          <img
+          <Image
             src={productImageSrc}
             alt={product.name}
             width={400}
             height={300}
-            style={{ width: "auto", height: "auto", maxWidth: "100%" }}
-            loading="eager"
+            className="product_image"
+            priority
+            unoptimized
           />
         </div>
 

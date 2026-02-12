@@ -4,6 +4,11 @@ Responsive landing page built with Next.js, TypeScript, and styled-components. I
 
 ## Quick Start
 
+**Requirements**
+
+- Node.js 24.13.0
+- npm 11.6.2
+
 1. Install dependencies:
    - `npm install`
 2. Run the dev server:

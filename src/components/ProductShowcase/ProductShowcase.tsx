@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useMemo, useState } from "react";
+import Image from "next/image";
 import Hero from "./Hero/Hero";
 import CategorySection from "./CategorySection/CategorySection";
 import Footer from "./Footer/Footer";
@@ -64,24 +65,30 @@ const ProductShowcase = () => {
                     </p>
                   </div>
                   <div className="story_media">
-                    <img
+                    <Image
                       src={getPublicAssetPath(
                         "/animations/adult-pointing-1.gif",
                       )}
                       alt="Animated adult pointing at a billboard of Anna's delicacies"
-                      loading="lazy"
+                      width={420}
+                      height={280}
+                      className="story_image"
+                      unoptimized
                     />
                   </div>
                 </div>
 
                 <div className="story_section">
                   <div className="story_media">
-                    <img
+                    <Image
                       src={getPublicAssetPath(
                         "/animations/adult-pointing-2.gif",
                       )}
                       alt="Animated adult presenting a billboard featuring Anna's delicacies"
-                      loading="lazy"
+                      width={420}
+                      height={280}
+                      className="story_image"
+                      unoptimized
                     />
                   </div>
                   <div className="story_content">

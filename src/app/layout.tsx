@@ -50,7 +50,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://chibuike07.github.io/annas_delicacies",
   },
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {

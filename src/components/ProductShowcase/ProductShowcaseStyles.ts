@@ -117,7 +117,7 @@ export const Page = styled.main`
       align-items: center;
     }
 
-    .story_media img {
+    .story_media .story_image {
       width: min(100%, 420px);
       height: auto;
       border-radius: 12px;
