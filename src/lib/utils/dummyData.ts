@@ -132,7 +132,7 @@ export const products: IProduct[] = [
     promoPercent: 12,
     image: "/products/flow-grinder.svg",
     category: "best-sellers",
-    badge: "Bell Sales",
+    badge: "Regular Sales",
   },
   {
     id: "best-2",
@@ -294,7 +294,7 @@ export const categories: ICategorySection[] = [
   },
   {
     id: "best-sellers",
-    title: "Bell Sales",
+    title: "Regular Sales",
     subtitle: "Traditional favorites loved by our customers.",
     items: products.filter((product) => product.category === "best-sellers"),
   },

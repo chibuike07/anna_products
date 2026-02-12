@@ -319,6 +319,7 @@ const ProductDetailPage = ({ params }: IProductDetailPageProps) => {
   }
 
   const productImageUrl = getAbsoluteImageUrl(product.image);
+  const productImageSrc = getPublicAssetPath(product.image);
   const productPageUrl = getProductDetailUrl(product.id);
   const categoryTitle =
     categories.find((category) => category.id === product.category)?.title ||
