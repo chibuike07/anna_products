@@ -43,7 +43,7 @@ export const getProductDetailUrl = (productId: string): string => {
   if (typeof productId !== "string" || !productId.trim()) {
     return APP_URL;
   }
-  return `${APP_URL}/product/${encodeURIComponent(productId.trim())}`;
+  return `${APP_URL}/product/${encodeURIComponent(productId.trim())}/`;
 };
 
 /**
