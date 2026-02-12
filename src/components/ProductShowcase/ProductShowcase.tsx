@@ -67,9 +67,9 @@ const ProductShowcase = () => {
                   <div className="story_media">
                     <Image
                       src={getPublicAssetPath(
-                        "/animations/adult-pointing-1.gif",
+                        "/animations/animated-spotlight.png",
                       )}
-                      alt="Animated adult pointing at a billboard of Anna's delicacies"
+                      alt="Food tray spotlighted on a billboard"
                       width={420}
                       height={280}
                       className="story_image"
@@ -81,10 +81,8 @@ const ProductShowcase = () => {
                 <div className="story_section">
                   <div className="story_media">
                     <Image
-                      src={getPublicAssetPath(
-                        "/animations/adult-pointing-2.gif",
-                      )}
-                      alt="Animated adult presenting a billboard featuring Anna's delicacies"
+                      src={getPublicAssetPath("/animations/fresh-tasty.png")}
+                      alt="Fresh and tasty Nigerian meal spread"
                       width={420}
                       height={280}
                       className="story_image"
