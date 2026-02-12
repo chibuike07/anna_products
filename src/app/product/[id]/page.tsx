@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { products, formatter, WHATSAPP_NUMBER } from "@/lib/utils/dummyData";
+import { categories, products, formatter } from "@/lib/utils/dummyData";
+import QuantityActions from "@/components/ProductDetail/QuantityActions";
 import {
   getAbsoluteImageUrl,
   getProductDetailUrl,
@@ -165,6 +166,75 @@ const ProductContainer = styled.article`
       }
     }
 
+    .quantity_section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .quantity_controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .quantity_label {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .quantity_inputs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .qty_btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: var(--brand);
+        color: var(--brand);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .qty_input {
+      width: 72px;
+      padding: 0.4rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      text-align: center;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .qty_input.error {
+      border-color: #dc2626;
+      background: rgba(220, 38, 38, 0.08);
+    }
+
+    .price_total {
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
     .action_buttons {
       display: flex;
       gap: 1rem;
@@ -248,9 +318,9 @@ export default function ProductDetailPage({ params }: IProductDetailPageProps) {
 
   const productImageUrl = getAbsoluteImageUrl(product.image);
   const productPageUrl = getProductDetailUrl(product.id);
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Hi, I'm interested in the "${product.name}" from Anna. Price: ${formatter.format(product.price)}. View product: ${productPageUrl}`,
-  )}`;
+  const categoryTitle =
+    categories.find((category) => category.id === product.category)?.title ||
+    "Products";
 
   return (
     <PageWrapper>
@@ -312,13 +382,7 @@ export default function ProductDetailPage({ params }: IProductDetailPageProps) {
           </div>
 
           <div className="action_buttons">
-            <a
-              href={whatsappUrl}
-              className="btn primary"
-              rel="noopener noreferrer"
-            >
-              💬 Buy on WhatsApp
-            </a>
+            <QuantityActions product={product} categoryTitle={categoryTitle} />
             <a href={`${APP_URL}#categories`} className="btn secondary">
               ← Back to Shop
             </a>
