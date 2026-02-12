@@ -90,10 +90,9 @@ const ProductCard = ({
             src={resolveImageUrl(product.image)}
             alt={`${sanitizeText(product.name)} - Delicious Nigerian food from Anna's Kitchen`}
             title={sanitizeText(product.name)}
-            width={520}
-            height={340}
-            sizes="(max-width: 48em) 100vw, 33vw"
-            style={{ width: "100%", height: "auto", cursor: "pointer" }}
+            fill
+            sizes="(max-width: 48em) 100vw, (max-width: 80em) 50vw, 33vw"
+            style={{ objectFit: "cover", cursor: "pointer" }}
             priority={false}
           />
         </Link>

@@ -26,6 +26,7 @@ export const ProductCardWrapper = styled.article`
     justify-content: center;
     position: relative;
     overflow: hidden;
+    aspect-ratio: 4 / 3;
 
     a {
       display: flex;
@@ -36,9 +37,8 @@ export const ProductCardWrapper = styled.article`
       text-decoration: none;
     }
 
+    span,
     img {
-      width: 100%;
-      height: auto;
       border-radius: 12px;
       transition: transform 0.2s ease;
     }

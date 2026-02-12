@@ -98,10 +98,12 @@ const ProductContainer = styled.article`
     align-items: center;
     justify-content: center;
     min-height: 350px;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
 
     .product_image {
-      max-width: 100%;
-      height: auto;
+      object-fit: cover;
     }
   }
 
@@ -362,11 +364,12 @@ const ProductDetailPage = ({ params }: IProductDetailPageProps) => {
           <Image
             src={productImageSrc}
             alt={product.name}
-            width={400}
-            height={300}
+            fill
+            sizes="(max-width: 640px) 100vw, 600px"
             className="product_image"
             priority
             unoptimized
+            style={{ objectFit: "cover" }}
           />
         </div>
 
