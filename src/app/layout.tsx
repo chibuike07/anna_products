@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { OG_IMAGE_URL } from "@/lib/utils/config";
+import { DEPLOYED_ORIGIN, OG_IMAGE_URL } from "@/lib/utils/config";
 import StyledComponentsRegistry from "@/lib/styled-components-registry";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(DEPLOYED_ORIGIN),
   title:
     "Anna's Kitchen - Authentic Nigerian Igbo Delicacies | Order on WhatsApp",
   description:

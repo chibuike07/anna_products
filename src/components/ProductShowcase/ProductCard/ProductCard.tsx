@@ -81,7 +81,11 @@ const ProductCard = ({
   return (
     <ProductCardWrapper>
       <div className="product_image">
-        <Link href={`/product/${product.id}/`}>
+        <Link
+          href={`/product/${product.id}/`}
+          className="product_link"
+          aria-label={`View ${sanitizeText(product.name)} details`}
+        >
           <Image
             src={resolveImageUrl(product.image)}
             alt={`${sanitizeText(product.name)} - Delicious Nigerian food from Anna's Kitchen`}
@@ -95,7 +99,11 @@ const ProductCard = ({
         </Link>
       </div>
       <div className="product_body">
-        <Link href={`/product/${product.id}/`}>
+        <Link
+          href={`/product/${product.id}/`}
+          className="product_link"
+          aria-label={`View ${sanitizeText(product.name)} details`}
+        >
           <h3 className="product_name">{sanitizeText(product.name)}</h3>
         </Link>
         <p className="description">{sanitizeText(product.description)}</p>

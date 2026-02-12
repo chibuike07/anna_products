@@ -55,9 +55,13 @@ export const ProductCardWrapper = styled.article`
     gap: 0.85rem;
     flex: 1;
 
-    a {
+    a,
+    .product_link {
       text-decoration: none;
       color: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
 
       &:hover .product_name {
         color: var(--brand);

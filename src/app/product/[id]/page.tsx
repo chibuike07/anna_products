@@ -50,6 +50,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       url: productPageUrl,
+      siteName: "Anna's Kitchen",
       title: product.name,
       description: product.description,
       images: [

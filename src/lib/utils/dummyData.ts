@@ -382,8 +382,8 @@ export const buildWhatsAppUrl = (
     typeof product?.promoPercent === "number" && product.promoPercent > 0
       ? `Discount: ${product.promoPercent}%`
       : "",
-    productImageUrl ? `Product Image: ${productImageUrl}` : "",
     productUrl ? `Product Link: ${productUrl}` : "",
+    productImageUrl ? `Product Image: ${productImageUrl}` : "",
   ]
     .filter(Boolean)
     .join("\n");
