@@ -1,25 +1,20 @@
 import type { Metadata } from "next";
-import { products } from "@/lib/utils/dummyData";
-import {
-  getAbsoluteImageUrl,
-  getOgImageUrl,
-  getProductDetailUrl,
-  getPublicAssetPath,
-} from "@/lib/utils/config";
+import { getProducts } from "@/lib/utils/googleSheets";
+import { getOgImageUrl, getProductDetailUrl } from "@/lib/utils/config";
 import ProductDetailPage from "@/components/ProductDetailPage/ProductDetailPage";
 import type { IProductDetailPageProps } from "@/components/ProductDetailPage/ProductDetailPage.interface";
 
-export async function generateStaticParams() {
-  return products.map((product) => ({
-    id: product.id,
-  }));
-}
+export const generateStaticParams = async () => {
+  const products = await getProducts();
+  return products.map((product: any) => ({ id: product.id }));
+};
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
-}: IProductDetailPageProps): Promise<Metadata> {
+}: IProductDetailPageProps): Promise<Metadata> => {
   const resolvedParams = await params;
-  const product = products.find((p) => p.id === resolvedParams.id);
+  const products = await getProducts();
+  const product = products.find((p: any) => p.id === resolvedParams.id);
   if (!product) {
     return {
       title: "Product Not Found",
@@ -27,9 +22,7 @@ export async function generateMetadata({
     };
   }
 
-  const productImageUrl = getAbsoluteImageUrl(product.image);
   const ogImageUrl = getOgImageUrl(product.image);
-  const productImageSrc = getPublicAssetPath(product.image);
   const productPageUrl = getProductDetailUrl(product.id);
 
   return {
@@ -63,7 +56,7 @@ export async function generateMetadata({
       canonical: productPageUrl,
     },
   };
-}
+};
 
 const ProductPage = ({ params }: IProductDetailPageProps) => {
   return <ProductDetailPage params={params} />;

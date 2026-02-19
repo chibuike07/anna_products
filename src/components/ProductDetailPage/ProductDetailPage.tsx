@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { use } from "react";
 import Image from "next/image";
-import { categories, products, formatter } from "@/lib/utils/dummyData";
+import { formatter } from "@/lib/utils/dummyData";
+import { getProducts, getCategories } from "@/lib/utils/googleSheets";
 import QuantityActions from "@/components/ProductDetail/QuantityActions";
 import {
   getAbsoluteImageUrl,
@@ -12,9 +13,29 @@ import {
 import type { IProductDetailPageProps } from "./ProductDetailPage.interface";
 import { PageWrapper, ProductContainer } from "./ProductDetailPage.styles";
 
+import { useEffect, useState } from "react";
+
 const ProductDetailPage = ({ params }: IProductDetailPageProps) => {
   const resolvedParams = use(params);
-  const product = products.find((p) => p.id === resolvedParams.id);
+  const [product, setProduct] = useState<any>(null);
+  const [categoryTitle, setCategoryTitle] = useState<string>("Products");
+
+  useEffect(() => {
+    (async () => {
+      const products = await getProducts();
+      const categories = await getCategories();
+      const foundProduct = products.find(
+        (p: any) => p.id === resolvedParams.id,
+      );
+      setProduct(foundProduct);
+      if (foundProduct) {
+        const foundCategory = categories.find(
+          (c: any) => c.id === foundProduct.category,
+        );
+        setCategoryTitle(foundCategory?.title || "Products");
+      }
+    })();
+  }, [resolvedParams.id]);
 
   if (!product) {
     notFound();
@@ -23,9 +44,6 @@ const ProductDetailPage = ({ params }: IProductDetailPageProps) => {
   const productImageUrl = getAbsoluteImageUrl(product.image);
   const productImageSrc = getPublicAssetPath(product.image);
   const productPageUrl = getProductDetailUrl(product.id);
-  const categoryTitle =
-    categories.find((category) => category.id === product.category)?.title ||
-    "Products";
 
   return (
     <PageWrapper>

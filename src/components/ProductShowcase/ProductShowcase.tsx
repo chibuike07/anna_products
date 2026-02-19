@@ -8,18 +8,25 @@ import Footer from "./Footer/Footer";
 import type { CategoryKey, IProduct } from "./ProductShowcase.interface";
 import { Page } from "./ProductShowcaseStyles";
 import { getPublicAssetPath } from "@/lib/utils/config";
-import {
-  categories,
-  initialVisible,
-  buildWhatsAppUrl,
-} from "@/lib/utils/dummyData";
+import { initialVisible, buildWhatsAppUrl } from "@/lib/utils/dummyData";
+import { getCategories } from "@/lib/utils/googleSheets";
+
+import { useEffect } from "react";
 
 const ProductShowcase = () => {
+  const [categories, setCategories] = useState<any[]>([]);
   const [visibleCounts, setVisibleCounts] = useState(initialVisible);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getCategories();
+      setCategories(data);
+    })();
+  }, []);
 
   const categoryMap = useMemo(
     () => new Map(categories.map((category) => [category.id, category])),
-    [],
+    [categories],
   );
 
   const handleLoadMore = (categoryId: CategoryKey): void => {
@@ -27,7 +34,10 @@ const ProductShowcase = () => {
     if (!category) return;
 
     setVisibleCounts((prev) => {
-      const nextCount = Math.min(prev[categoryId] + 4, category.items.length);
+      const nextCount = Math.min(
+        prev[categoryId] + 4,
+        category.items?.length || 0,
+      );
       return { ...prev, [categoryId]: nextCount };
     });
   };
@@ -45,11 +55,13 @@ const ProductShowcase = () => {
     <Page>
       <Hero />
       <section className="categories" id="categories">
-        {categories.map((category) => (
+        {categories.map((category: any) => (
           <Fragment key={category.id}>
             <CategorySection
               category={category}
-              visibleCount={visibleCounts[category.id]}
+              visibleCount={
+                visibleCounts[category.id as keyof typeof visibleCounts]
+              }
               onLoadMore={() => handleLoadMore(category.id)}
               onBuyClick={handleBuyClick}
             />
